@@ -1,4 +1,4 @@
-package main.java.com.maksiomo.controller;
+package com.maksiomo.controller.implementation;
 
 public class ClientControllerImplementation {
 

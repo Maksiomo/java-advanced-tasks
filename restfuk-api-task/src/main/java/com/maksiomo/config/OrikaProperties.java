@@ -1,4 +1,4 @@
-package main.java.com.maksiomo.config;
+package com.maksiomo.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

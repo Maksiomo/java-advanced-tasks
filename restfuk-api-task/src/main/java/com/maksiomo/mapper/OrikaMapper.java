@@ -1,4 +1,4 @@
-package main.java.com.maksiomo.mapper;
+package com.maksiomo.mapper;
 
 public class OrikaMapper {
 

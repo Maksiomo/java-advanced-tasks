@@ -1,16 +1,13 @@
-package main.java.com.maksiomo.config;
+package com.maksiomo.config;
 
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.converter.ConverterFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
-
-import java.beans.BeanProperty;
-
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import main.java.com.maksiomo.mapper.converters.StringToLocakDateConverter;
+import com.maksiomo.mapper.converters.StringToLocalDateConverter;
 
 @Slf4j
 @Configuration
@@ -24,7 +21,7 @@ public class OrikaConfig {
                 .build();
 
         ConverterFactory converterFactory = factory.getConverterFactory();
-        converterFactory.registerConverter(StringToLocakDateConverter.CONVERTER_CODE,
+        converterFactory.registerConverter(StringToLocalDateConverter.CONVERTER_CODE,
                 new StringToLocalDateConverter());
         return factory;
     }
