@@ -1,0 +1,6 @@
+orika:
+  name: devOrika
+
+spring:
+  liquibase:
+    contexts: test

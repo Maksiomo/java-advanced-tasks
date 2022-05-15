@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="create-tables" author="rassafel" context="prod,test">
+        <createTable tableName="person_table">
+            <column name="id" type="VARCHAR(8)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_person_table"/>
+            </column>
+            <column name="first_name" type="VARCHAR(32)"/>
+            <column name="last_name" type="VARCHAR(32)"/>
+            <column name="middle_name" type="VARCHAR(32)"/>
+            <column name="age" type="INT"/>
+            <column name="birthdate" type="DATE"/>
+            <column name="version" type="INT"/>
+        </createTable>
+
+        <createTable tableName="person_passport">
+            <column name="id" type="INT">
+                <constraints nullable="false"
+                             primaryKey="true"
+                             primaryKeyName="pk_person_passport"/>
+            </column>
+            <column name="serial_number" type="VARCHAR(255)"/>
+            <column name="recieve_date" type="DATE"/>
+            <column name="birth_date" type="DATE"/>
+            <column name="person_id" type="VARCHAR(8)"/>
+        </createTable>
+        <addForeignKeyConstraint
+            baseColumnNames="person_id"
+            baseTableName="person_passport"
+            constraintName="FK_PERSON_PASSPORT_ON_PERSON"
+            referencedColumnNames="id"
+            referencedTableName="person_table"/>
+    </changeSet>
+
+    <changeSet id="insert-data" author="rassafel" context="test">
+        <insert tableName="person_table">
+            <column name="id" value="1"/>
+            <column name="first_name" value="Egor"/>
+            <column name="last_name" value="Ivanov"/>
+            <column name="middle_name" value="Ivanovich"/>
+            <column name="age" valueNumeric="20"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
