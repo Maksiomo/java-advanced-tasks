@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 public class Client {
     @Id
     @Column(name = "id", length = 8)
-    private String id;
+    private Integer id;
     @Pattern(regexp = "[\\-А-Яа-яЁё]+", message = "invalid symbol in first name")
     @Column(name = "first_name", length = 32, nullable = false)
     private String firstName;

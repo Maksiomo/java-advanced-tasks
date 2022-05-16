@@ -19,13 +19,13 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(name = "id_client", length = 8, nullable = false)
-    private String id_client;
+    private Integer id_client;
     @Column(name = "event_type", length = 8, nullable = false)
     private String event_type;
     @Column(name = "event_time", nullable = false)
     private LocalDateTime event_time;
 
-    public Event(String idClient, String clientEvent, LocalDateTime eventTime) {
+    public Event(Integer idClient, String clientEvent, LocalDateTime eventTime) {
         this.id_client = idClient;
         this.event_type = clientEvent;
         this.event_time = eventTime;
