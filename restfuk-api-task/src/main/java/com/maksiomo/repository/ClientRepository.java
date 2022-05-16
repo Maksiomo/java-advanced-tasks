@@ -12,7 +12,7 @@ import com.maksiomo.model.domain.Client;
 public interface ClientRepository extends PagingAndSortingRepository<Client, String> {
     Streamable<Client> findAll();
 
-    Optional<Client> getClientById(Integer idClient);
+    Optional<Client> findById(Integer idClient);
 
-    Page<Client> listClientsByDomain(Pageable pageable, String domain);
+    Page<Client> findByEmailContaining(Pageable pageable, String domain);
 }

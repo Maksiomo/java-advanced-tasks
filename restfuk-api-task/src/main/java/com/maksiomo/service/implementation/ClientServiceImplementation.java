@@ -7,6 +7,8 @@ import javax.validation.constraints.Positive;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,13 @@ import com.maksiomo.service.ClientService;
 @Service
 @Validated
 public class ClientServiceImplementation implements ClientService {
+    @Autowired
     private final ClientRepository clientRepository;
+    @Autowired
     private final EventRepository eventRepository;
+    @Autowired
     private final ClientMapper clientMapper;
+    @Autowired
     private final ClientPublisher publisher;
 
     @Override
@@ -46,7 +52,7 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Client alterClient(ClientDTO newData, @Positive Integer idClient) {
-        Optional<Client> cOptional = clientRepository.getClientById(idClient);
+        Optional<Client> cOptional = clientRepository.findById(idClient);
         if (cOptional.isPresent()) {
             Client client = cOptional.get();
             Client tempClient = clientMapper.mapClient(newData);
@@ -71,7 +77,7 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public String deleteClient(@Positive Integer idClient) {
-        Optional<Client> currentClient = clientRepository.getClientById(idClient);
+        Optional<Client> currentClient = clientRepository.findById(idClient);
         if (currentClient.isPresent()) {
             Client client = currentClient.get();
             client.setDeletionDate(LocalDateTime.now());
@@ -85,7 +91,7 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Optional<Client> getClientById(@Positive Integer idClient) {
-        return clientRepository.getClientById(idClient);
+        return clientRepository.findById(idClient);
     }
 
     @Override
@@ -95,7 +101,7 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Page<Client> listClientsByDomain(Pageable pageable, String domain) {
-        return clientRepository.listClientsByDomain(pageable, domain);
+        return clientRepository.findByEmailContaining(pageable, domain);
     }
 
 }
