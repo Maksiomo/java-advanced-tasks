@@ -54,13 +54,6 @@ public class ClientControllerImplementation implements ClientController {
     }
 
     @Override
-    public ResponseEntity<Page<Client>> listClientsBySecondName(Integer page, Integer size, String secondName) {
-        PageRequest pageRequest = PageRequest.of(page, size);
-        Page<Client> clients = clientService.listClientsBySecondName(pageRequest, secondName);
-        return ResponseEntity.ok(clients);
-    }
-
-    @Override
     public ResponseEntity<Client> getClientById(Integer idClient) {
         return ResponseEntity.of(clientService.getClientById(idClient));
     }

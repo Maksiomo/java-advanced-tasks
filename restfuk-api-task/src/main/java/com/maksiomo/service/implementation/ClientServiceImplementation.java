@@ -90,17 +90,12 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Page<Client> getClients(Pageable pageable) {
-        return clientRepository.getClients(pageable);
+        return clientRepository.findAll(pageable);
     }
 
     @Override
     public Page<Client> listClientsByDomain(Pageable pageable, String domain) {
         return clientRepository.listClientsByDomain(pageable, domain);
-    }
-
-    @Override
-    public Page<Client> listClientsBySecondName(Pageable pageable, String secondName) {
-        return clientRepository.listClientsBySecondName(pageable, secondName);
     }
 
 }

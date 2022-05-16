@@ -25,6 +25,4 @@ public interface ClientService {
 
     Page<Client> listClientsByDomain(Pageable pageable, String domain);
 
-    Page<Client> listClientsBySecondName(Pageable pageable, String secondName);
-
 }

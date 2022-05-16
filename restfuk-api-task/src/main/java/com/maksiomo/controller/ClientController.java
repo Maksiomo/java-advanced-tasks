@@ -66,16 +66,6 @@ public interface ClientController {
                         @RequestParam(defaultValue = "20") Integer size,
                         @RequestParam String domain);
 
-        @GetMapping("/listBy/secondName")
-        @Operation(description = "Request for a list of clients with certian second name.")
-        @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Request is ok.", content = {
-                                        @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
-                        @ApiResponse(responseCode = "400", description = "Invalid second name in request")
-        })
-        ResponseEntity<Page<Client>> listClientsBySecondName(@RequestParam Integer page,
-                        @RequestParam(defaultValue = "20") Integer size, @RequestParam String secondName);
-
         @GetMapping("/{id}")
         @Operation(description = "Request for a client info.")
         @ApiResponses({
