@@ -5,8 +5,10 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -28,20 +30,18 @@ public class Client {
     @Column(name = "middle_name", length = 32, nullable = false)
     private String middleName;
     @Column(name = "birth_date", nullable = false)
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
     @Pattern(regexp = "^(\\s*)?(\\+)?([- _():=+]?\\d[- _():=+]?){10,14}(\\s*)?$", message = "invalid symbol in phone number")
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "registration_date", nullable = false)
     private LocalDateTime registrationDate;
     @Column(name = "deletion_date")
     private LocalDateTime deletionDate;
-
-    @Version
-    private Integer version = 1;
 }

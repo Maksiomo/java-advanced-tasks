@@ -27,23 +27,23 @@ public interface ClientController {
         })
         ResponseEntity<Client> createClient(@RequestBody(required = false) ClientDTO dto);
 
-        @GetMapping("/alter/{id}")
+        @PostMapping("/alter/{idClient}")
         @Operation(description = "Request for alteration of a client.")
         @ApiResponses({
                         @ApiResponse(responseCode = "200", description = "Request is ok.", content = {
                                         @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
                         @ApiResponse(responseCode = "400", description = "Invalid client id")
         })
-        ResponseEntity<Client> alterClient(@RequestParam ClientDTO newData, @RequestParam Integer idClient);
+        ResponseEntity<Client> alterClient(@RequestBody ClientDTO newData, @PathVariable Integer idClient);
 
-        @GetMapping("/delete/{id}")
+        @PostMapping("/delete/{idClient}")
         @Operation(description = "Request for deletion of a client.")
         @ApiResponses({
                         @ApiResponse(responseCode = "200", description = "Request is ok.", content = {
                                         @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
                         @ApiResponse(responseCode = "400", description = "Invalid client id")
         })
-        ResponseEntity<String> deleteClient(@RequestParam Integer idClient);
+        ResponseEntity<String> deleteClient(@PathVariable Integer idClient);
 
         @GetMapping("/list")
         @Operation(description = "Request for a list of clients.")
@@ -66,7 +66,7 @@ public interface ClientController {
                         @RequestParam(defaultValue = "20") Integer size,
                         @RequestParam String domain);
 
-        @GetMapping("/{id}")
+        @GetMapping("/{idClient}")
         @Operation(description = "Request for a client info.")
         @ApiResponses({
                         @ApiResponse(responseCode = "200", description = "Request is ok.", content = {
@@ -74,5 +74,10 @@ public interface ClientController {
                         @ApiResponse(responseCode = "400", description = "Invalid client id")
         })
         ResponseEntity<Client> getClientById(@PathVariable(required = false) Integer idClient);
+
+        @GetMapping("/order")
+        @Operation(description = "Request for getting clients ordered by last name.")
+        ResponseEntity<Page<Client>> getClientsByLastNameByOrder(@RequestParam Integer page,
+                        @RequestParam(defaultValue = "20") Integer size);
 
 }

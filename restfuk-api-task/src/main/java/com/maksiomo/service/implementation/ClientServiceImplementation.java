@@ -1,5 +1,6 @@
 package com.maksiomo.service.implementation;
 
+import java.io.Console;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,7 +43,8 @@ public class ClientServiceImplementation implements ClientService {
 
     @Override
     public Client createClient(ClientDTO clientData) {
-        Client client = clientMapper.mapClient(clientData);
+        Client client = clientMapper.createClientDTOToClient(clientData);
+        client.setRegistrationDate(LocalDateTime.now());
         log.info("Object: {}", client);
         clientRepository.save(client);
         eventRepository.save(new Event(client.getId(), ClientEvent.CREATE.toString(), LocalDateTime.now()));
@@ -55,7 +57,7 @@ public class ClientServiceImplementation implements ClientService {
         Optional<Client> cOptional = clientRepository.findById(idClient);
         if (cOptional.isPresent()) {
             Client client = cOptional.get();
-            Client tempClient = clientMapper.mapClient(newData);
+            Client tempClient = clientMapper.createClientDTOToClient(newData);
             client.setBirthDate(
                     (tempClient.getBirthDate() != null) ? tempClient.getBirthDate() : client.getBirthDate());
             client.setFirstName(
@@ -72,7 +74,7 @@ public class ClientServiceImplementation implements ClientService {
             publisher.publish(ClientEvent.ALTER);
             return client;
         }
-        throw new Error("Client not found");
+        return null;
     }
 
     @Override

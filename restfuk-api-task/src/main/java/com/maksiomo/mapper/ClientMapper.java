@@ -8,5 +8,5 @@ import com.maksiomo.model.domain.Client;
 @Mapper(componentModel = "spring")
 public interface ClientMapper {
     @Mapping(target = "birthDate", dateFormat = "yyyy-MM-dd")
-    Client mapClient(ClientDTO clientDTO);
+    Client createClientDTOToClient(ClientDTO clientDTO);
 }

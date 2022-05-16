@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.maksiomo.controller.ClientController;
@@ -56,6 +57,14 @@ public class ClientControllerImplementation implements ClientController {
     @Override
     public ResponseEntity<Client> getClientById(Integer idClient) {
         return ResponseEntity.of(clientService.getClientById(idClient));
+    }
+
+    @Override
+    public ResponseEntity<Page<Client>> getClientsByLastNameByOrder(Integer page, Integer size) {
+        Sort sort = Sort.by(Sort.Order.asc("lastName"));
+        PageRequest pageRequest = PageRequest.of(page, size, sort);
+        Page<Client> clients = clientService.getClients(pageRequest);
+        return ResponseEntity.ok(clients);
     }
 
 }

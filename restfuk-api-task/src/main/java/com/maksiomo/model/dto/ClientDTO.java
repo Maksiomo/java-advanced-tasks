@@ -16,7 +16,7 @@ public class ClientDTO {
 
     @NotNull
     @JsonProperty("id")
-    private String id;
+    private Integer id;
     @NotNull
     @JsonProperty("first_name")
     private String firstName;
@@ -28,9 +28,6 @@ public class ClientDTO {
     @NotNull
     @JsonProperty("birth_date")
     private String birthDate;
-    @NotNull
-    @JsonProperty("phone")
-    private String phone;
     @NotNull
     @JsonProperty("email")
     private String email;
