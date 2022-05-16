@@ -3,6 +3,7 @@ package com.maksiomo.controller.implementation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import com.maksiomo.controller.ClientController;
@@ -40,26 +41,28 @@ public class ClientControllerImplementation implements ClientController {
 
     @Override
     public ResponseEntity<Page<Client>> getClients(Integer page, Integer size) {
-        // TODO Auto-generated method stub
-        return null;
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Client> clients = clientService.getClients(pageRequest);
+        return ResponseEntity.ok(clients);
     }
 
     @Override
-    public ResponseEntity<List<Client>> listClientsByDomain(Integer page, Integer size, String domain) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<Page<Client>> listClientsByDomain(Integer page, Integer size, String domain) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Client> clients = clientService.listClientsByDomain(pageRequest, domain);
+        return ResponseEntity.ok(clients);
     }
 
     @Override
-    public ResponseEntity<List<Client>> listClientsBySecondName(Integer page, Integer size) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<Page<Client>> listClientsBySecondName(Integer page, Integer size, String secondName) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<Client> clients = clientService.listClientsBySecondName(pageRequest, secondName);
+        return ResponseEntity.ok(clients);
     }
 
     @Override
-    public ResponseEntity<Client> getClientById(String id, String firstName) {
-        // TODO Auto-generated method stub
-        return null;
+    public ResponseEntity<Client> getClientById(Integer idClient) {
+        return ResponseEntity.of(clientService.getClientById(idClient));
     }
 
 }

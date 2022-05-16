@@ -21,7 +21,7 @@ public interface ClientService {
 
     Optional<Client> getClientById(@Positive Integer idClient);
 
-    Streamable<Client> getClients(Pageable pageable);
+    Page<Client> getClients(Pageable pageable);
 
     Page<Client> listClientsByDomain(Pageable pageable, String domain);
 

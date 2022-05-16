@@ -62,7 +62,7 @@ public interface ClientController {
                                         @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
                         @ApiResponse(responseCode = "400", description = "Invalid domain")
         })
-        ResponseEntity<List<Client>> listClientsByDomain(@RequestParam Integer page,
+        ResponseEntity<Page<Client>> listClientsByDomain(@RequestParam Integer page,
                         @RequestParam(defaultValue = "20") Integer size,
                         @RequestParam String domain);
 
@@ -73,8 +73,8 @@ public interface ClientController {
                                         @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
                         @ApiResponse(responseCode = "400", description = "Invalid second name in request")
         })
-        ResponseEntity<List<Client>> listClientsBySecondName(@RequestParam Integer page,
-                        @RequestParam(defaultValue = "20") Integer size);
+        ResponseEntity<Page<Client>> listClientsBySecondName(@RequestParam Integer page,
+                        @RequestParam(defaultValue = "20") Integer size, @RequestParam String secondName);
 
         @GetMapping("/{id}")
         @Operation(description = "Request for a client info.")
@@ -83,7 +83,6 @@ public interface ClientController {
                                         @Content(mediaType = MediaType.APPLICATION_JSON_VALUE) }),
                         @ApiResponse(responseCode = "400", description = "Invalid client id")
         })
-        ResponseEntity<Client> getClientById(@PathVariable(required = false) String id,
-                        @RequestParam(defaultValue = "FirstName") String firstName);
+        ResponseEntity<Client> getClientById(@PathVariable(required = false) Integer idClient);
 
 }
