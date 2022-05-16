@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
 import java.time.LocalDate;
 
 @Data
@@ -16,24 +18,26 @@ public class Client {
     @Id
     @Column(name = "id", length = 8)
     private String id;
-    @Column(name = "first_name", length = 32)
+    @Pattern(regexp = "[\\-А-Яа-яЁё]+", message = "invalid symbol in first name")
+    @Column(name = "first_name", length = 32, nullable = false)
     private String firstName;
-    @Column(name = "last_name", length = 32)
+    @Pattern(regexp = "[\\-А-Яа-яЁё]+", message = "invalid symbol in last name")
+    @Column(name = "last_name", length = 32, nullable = false)
     private String lastName;
-    @Column(name = "middle_name", length = 32)
+    @Pattern(regexp = "[\\-А-Яа-яЁё]+", message = "invalid symbol in middle name")
+    @Column(name = "middle_name", length = 32, nullable = false)
     private String middleName;
-    @Column(name = "age")
-    private Integer age;
-    @Column(name = "birthdate")
+    @Column(name = "birthdate", nullable = false)
     private LocalDate clientBirthDate;
     @Enumerated(EnumType.STRING)
-    @Column(name = "gender")
+    @Column(name = "gender", nullable = false)
     private Gender gender;
-    @Column(name = "phone_number")
+    @Pattern(regexp = "^(\\s*)?(\\+)?([- _():=+]?\\d[- _():=+]?){10,14}(\\s*)?$", message = "invalid symbol in phone number")
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
-    @Column(name = "email")
+    @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "registration_date")
+    @Column(name = "registration_date", nullable = false)
     private LocalDate registrationDate;
     @Column(name = "deletion_date")
     private LocalDate deletionDate;
