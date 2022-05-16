@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @RequiredArgsConstructor
@@ -27,8 +27,8 @@ public class Client {
     @Pattern(regexp = "[\\-А-Яа-яЁё]+", message = "invalid symbol in middle name")
     @Column(name = "middle_name", length = 32, nullable = false)
     private String middleName;
-    @Column(name = "birthdate", nullable = false)
-    private LocalDate clientBirthDate;
+    @Column(name = "birth_date", nullable = false)
+    private LocalDateTime birthDate;
     @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
@@ -38,9 +38,9 @@ public class Client {
     @Column(name = "email", nullable = false)
     private String email;
     @Column(name = "registration_date", nullable = false)
-    private LocalDate registrationDate;
+    private LocalDateTime registrationDate;
     @Column(name = "deletion_date")
-    private LocalDate deletionDate;
+    private LocalDateTime deletionDate;
 
     @Version
     private Integer version = 1;

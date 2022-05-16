@@ -2,12 +2,14 @@ package com.maksiomo.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.util.Streamable;
 import org.springframework.validation.annotation.Validated;
 import com.maksiomo.model.dto.ClientDTO;
 import com.maksiomo.model.domain.Client;
 
 import javax.validation.constraints.Positive;
 import java.util.List;
+import java.util.Optional;
 
 @Validated
 public interface ClientService {
@@ -17,12 +19,12 @@ public interface ClientService {
 
     String deleteClient(@Positive Integer idClient);
 
-    Client getClientById(@Positive Integer idClient);
+    Optional<Client> getClientById(@Positive Integer idClient);
 
-    List<Client> getClients(Pageable pageable);
+    Streamable<Client> getClients(Pageable pageable);
 
-    List<Client> listClientsByDomain(Pageable pageable, String domain);
+    Page<Client> listClientsByDomain(Pageable pageable, String domain);
 
-    List<Client> listClientsBySecondName(Pageable pageable, String secondName);
+    Page<Client> listClientsBySecondName(Pageable pageable, String secondName);
 
 }
